@@ -1,59 +1,55 @@
 import { useState,useEffect } from 'react'
-import Input from './components/Input';
-import Btnadd from './components/Btnadd';
-import Themap from './components/Themap';
+import TodoInput from './components/TodoInput';
+import TodoAddButton from './components/TodoAddButton';
+import TodoList from './components/TodoList';
 import './components/Toddo.css';
 
 function App() {
   
   const [Text,setText] = useState('')
   
-    const [Under,setUnder]= useState(() => {
-    const savedUnder = localStorage.getItem('Under');
-    return savedUnder ? JSON.parse(savedUnder) : [];
+    const [Todos,setTodos]= useState(() => {
+    const savedTodos = localStorage.getItem('Todos');
+    return savedTodos ? JSON.parse(savedTodos) : [];
   });
 
 
    useEffect(() => {
-    localStorage.setItem('Under',JSON.stringify(Under ))
-  },[Under])
+    localStorage.setItem('Todos',JSON.stringify(Todos ))
+  },[Todos])
 
 
   function add(){
     if (Text.trim() ==='') return;
-    setUnder([...Under,Text])
+    setTodos([...Todos,Text])
     setText('')
   }
 
-  function deletes(dex){
-    const remove = Under.filter((Text,index) => index !== dex)
-    setUnder(remove)
+  function onDelete(dex){
+    const remove = Todos.filter((Text,index) => index !== dex)
+    setTodos(remove)
   }
-    return(
-      <>
+
+  return(
+    <>
 
       <div className='maindiv'> 
         
         <div>
- 
-       <Input Text={Text} setText={setText}/>
+         <TodoInput Text={Text} setText={setText}/>
+         <TodoAddButton add={add}/>
+        </div>
 
-      <Btnadd add={add}/>
-      </div>
-
-          
-      </div>
-
-
-
-        
-       <Themap
-       Under={Under} 
-       deletes={deletes}
+        <TodoList
+          Todos={Todos} 
+           onDelete={onDelete}
         />
         
-      </>
-    )
+      </div>
+        
+
+    </>
+  )
   
 }
 
