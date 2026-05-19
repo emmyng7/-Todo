@@ -2,11 +2,11 @@
 
 import Button from "./Button";
 
-function TodoList({Todos,onDelete}){
+function TodoList({todos,onDelete}){
     return(
         <>
         {
-          Todos.map((text,index) =>
+          todos.map((text,index) =>
           <div key={index}>
             <p>{text}</p>
 

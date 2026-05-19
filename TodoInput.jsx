@@ -1,12 +1,12 @@
 
 
-function TodoInput({Text,setText}){
+function TodoInput({text,setText}){
     return(
       <>
         <input
           type="text" 
           placeholder='Enter Text...'
-          value={Text}
+          value={text}
           onChange={(e)=>setText(e.target.value)}
         />
     </>
